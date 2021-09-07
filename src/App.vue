@@ -1,15 +1,25 @@
 <template>
   <div id="app">
-    <nc-alert>
-        This is an alert message!
-    </nc-alert>
+    <Header />
+    <Table />
+    <Footer />
   </div>
 </template>
 
 <script>
-export default {
+import Vue from 'vue';
+import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
+import Table from './components/Table.vue';
+
+export default Vue.extend({
   name: 'App',
-}
+  components: {
+    Footer,
+    Header,
+    Table,
+  }
+});
 </script>
 
 <style>
@@ -19,6 +29,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  border: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  padding: 20px !important;
+  background-color: #fff;
 }
 </style>

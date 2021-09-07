@@ -1,4 +1,8 @@
-# visma-ui-test
+# About
+A simple web app that shows information about the villagers in 
+Animal Crossing: New Horizons.   
+Product of a study into Vue and Visma's UI Library.   
+
 
 ## Project setup
 ```
@@ -22,3 +26,8 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## Resources
+- [NC4 Vue.js UI Library by Visma](https://ux.visma.com/guidelines-resources/vuejs-ui-library/)
+- [ANCH data by alexislours (ACNH API)](https://github.com/alexislours/ACNHAPI)
