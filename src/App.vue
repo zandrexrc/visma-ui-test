@@ -1,24 +1,24 @@
 <template>
   <div id="app">
-    <Header />
-    <Table />
-    <Footer />
+    <AppHeader />
+    <AppTable />
+    <AppFooter />
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import Footer from './components/Footer.vue';
-import Header from './components/Header.vue';
-import Table from './components/Table.vue';
+import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
+import AppTable from './components/AppTable.vue';
 
 export default Vue.extend({
   name: 'App',
   components: {
-    Footer,
-    Header,
-    Table,
-  }
+    AppFooter,
+    AppHeader,
+    AppTable,
+  },
 });
 </script>
 

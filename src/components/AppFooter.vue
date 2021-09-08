@@ -13,11 +13,11 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  name: 'Footer',
+  name: 'AppFooter',
 });
 </script>
 
-<style>
+<style scoped>
 #footer {
     margin-top: 20px;
 }

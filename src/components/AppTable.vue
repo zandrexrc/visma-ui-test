@@ -1,20 +1,20 @@
 <template>
   <div>
-    <nc-modal 
+    <nc-modal  
+      v-if="selectedVillager"
       v-model="modal" 
-      v-if="selectedVillager" 
       :title="selectedVillager['name']['name-USen']"
     >
       <nc-container>
         <nc-row>
-          <nc-column :xs="7">
+          <nc-column>
             <img 
               :src="selectedVillager['image_uri']" 
               alt="image"
               width="auto"
             >
           </nc-column>
-          <nc-column :xs="5">
+          <nc-column>
             <nc-list-group>
               <nc-list-group-item>
                 <b>Species</b> <br> {{ selectedVillager['species'] }}
@@ -54,13 +54,13 @@ import Vue from 'vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
 
 export default Vue.extend({
-  name: 'Table',
+  name: 'AppTable',
   data() {
     return {
+      modal: false,
+      selectedVillager: null,
       sortBy: undefined,
       sortDirection: undefined,
-      selectedVillager: null,
-      modal: false,
       columns: [
         { 
           id: 0, 
@@ -89,14 +89,14 @@ export default Vue.extend({
           title: 'Personality', 
           value: 'personality', 
           sortable: true, 
-          filterable: true 
+          filterable: true, 
         },
         { 
           id: 3, 
           title: 'Gender', 
           value: 'gender', 
           sortable: true, 
-          filterable: true 
+          filterable: true, 
         },
       ],
     };
@@ -125,7 +125,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
 #table {
     max-width: 800px;
     margin: 0 auto;
