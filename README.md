@@ -1,7 +1,7 @@
 # About
-A simple web app that shows information about the villagers in 
-Animal Crossing: New Horizons.   
+A simple web app about the villagers in Animal Crossing: New Horizons.   
 Product of a study into Vue and Visma's UI Library.   
+Live demo [here](https://acnh-zandrexrc.netlify.app/).
 
 
 ## Project setup
