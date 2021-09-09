@@ -1,50 +1,31 @@
 <template>
   <div>
     <nc-modal  
-      v-if="selectedVillager"
+      v-if="selectedRow"
       v-model="modal" 
-      :title="selectedVillager['name']['name-USen']"
+      :title="selectedRow['name']['name-USen']"
     >
-      <nc-container>
-        <nc-row>
-          <nc-column>
-            <img 
-              :src="selectedVillager['image_uri']" 
-              alt="image"
-              width="auto"
-            >
-          </nc-column>
-          <nc-column>
-            <nc-list-group>
-              <nc-list-group-item>
-                <b>Species</b> <br> {{ selectedVillager['species'] }}
-              </nc-list-group-item>
-              <nc-list-group-item>
-                <b>Personality</b> <br> {{ selectedVillager['personality'] }}
-              </nc-list-group-item>
-              <nc-list-group-item>
-                <b>Gender</b> <br> {{ selectedVillager['gender'] }}
-              </nc-list-group-item>
-              <nc-list-group-item>
-                <b>Birthday</b> <br> {{ selectedVillager['birthday-string'] }}
-              </nc-list-group-item>
-            </nc-list-group>
-          </nc-column>
-        </nc-row>
-      </nc-container>
-      <template #footer>
-        <h3><i>{{ selectedVillager['saying'] }}</i></h3>
-      </template>
+      <table-row-details
+        :image="selectedRow['image_uri']"
+        :quote="selectedRow['saying']"
+        :facts="[
+          { label: 'Species', value: selectedRow['species'] },
+          { label: 'Personality', value: selectedRow['personality'] },
+          { label: 'Gender', value: selectedRow['gender'] },
+          { label: 'Birthday', value: selectedRow['birthday-string'] },
+        ]"
+      />
     </nc-modal>
     <nc-datatable
       id="table"
       :columns.sync="columns"
-      :rows.sync="displayedVillagers"
-      :rows-total="getDisplayedVillagersCount"
+      :rows.sync="displayedRows"
+      :rows-total="displayedRowsCount"
+      :filters="filters"
       :sort-by="sortBy"
       :sort-direction="sortDirection"
       @sort="onSort"
-      @update:filters="filterVillagers"
+      @update:filters="onFilter"
     />
   </div>
 </template>
@@ -52,13 +33,18 @@
 <script>
 import Vue from 'vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
+import TableRowDetails from './TableRowDetails.vue';
 
 export default Vue.extend({
-  name: 'AppTable',
+  name: 'VillagersTable',
+  components: {
+    TableRowDetails,
+  },
   data() {
     return {
+      filters: {},
       modal: false,
-      selectedVillager: null,
+      selectedRow: null,
       sortBy: undefined,
       sortDirection: undefined,
       columns: [
@@ -71,7 +57,7 @@ export default Vue.extend({
           td: {
             on: {
               click: (event, row) => {
-                this.selectedVillager = row;
+                this.selectedRow = row;
                 this.modal = true;
               }
             }
@@ -102,20 +88,22 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapState([
-      'displayedVillagers',
-    ]),
-    ...mapGetters([
-      'getVillager',
-      'getDisplayedVillagersCount',
-    ]),
+    ...mapState('villagers', {
+      displayedRows: 'displayedVillagers',
+    }),
+    ...mapGetters('villagers', {
+      displayedRowsCount: 'getDisplayedVillagersCount',
+    }),
   },
   methods: {
-    ...mapActions([
-      'setVillagers',
+    ...mapActions('villagers', [
       'sortVillagers',
       'filterVillagers',
     ]),
+    onFilter(filters) {
+      this.filters = filters;
+      this.filterVillagers(filters);
+    },
     onSort(sortBy, sortDirection) {
       this.sortBy = sortBy;
       this.sortDirection = sortDirection;

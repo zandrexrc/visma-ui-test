@@ -1,17 +1,8 @@
 <template>
-  <nc-container>
+  <nc-container id="appHeader">
     <nc-row>
         <nc-column>
-            <img 
-                src="../assets/acnh-logo.png" 
-                alt="acnh-logo"
-                width="200"
-            >
-        </nc-column>
-    </nc-row>
-    <nc-row>
-        <nc-column>
-            <h1>Villagers list</h1>
+            <h1>{{ title }}</h1>
         </nc-column>
     </nc-row>
   </nc-container>
@@ -22,5 +13,17 @@ import Vue from 'vue';
 
 export default Vue.extend({
   name: 'AppHeader',
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
 });
 </script>
+
+<style scoped>
+#appHeader {
+  margin-top: 30px;
+}
+</style>
