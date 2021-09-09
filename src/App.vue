@@ -1,24 +1,14 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <AppTable />
-    <AppFooter />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import AppFooter from './components/AppFooter.vue';
-import AppHeader from './components/AppHeader.vue';
-import AppTable from './components/AppTable.vue';
 
 export default Vue.extend({
   name: 'App',
-  components: {
-    AppFooter,
-    AppHeader,
-    AppTable,
-  },
 });
 </script>
 
